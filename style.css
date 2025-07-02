@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Varela+Round&display=swap');
+
+* {
+	font-family: "Comfortaa", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+	color: #FEF9EF;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#bar {
+    width: 100vw;
+    height: 50px;
+    background-color: lightslategrey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
