@@ -76,6 +76,7 @@
 	font-weight: 400;
 	font-style: normal;
 	color: white;
+    border: solid red;
 }
 
 html, body {
@@ -98,7 +99,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 4px 12px rgb(9, 24, 36);
+}
+
+.shadow {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
 }
 
 #barContent {
@@ -113,7 +117,6 @@ body {
 
 #content {
     width: 1000px;
-    margin: 150px auto;
     display: flex;
     justify-content: center;
 }
@@ -131,7 +134,7 @@ body {
 }
 
 #balance {
-    background-color: var(--grey-800);
+    background-color: var(--grey-700);
     border-radius: 5px;
     height: 40px;
     width: 80px;
@@ -149,9 +152,64 @@ body {
 }
 
 .game {
-    background-color: var(--grey-800);
+    background-color: var(--grey-700);
     border-radius: 10px;
     width: 120px;
     height: 180px;
     margin: 15px 5px;
+}
+
+#diamondsGame {
+    width: 600px;
+    height: 600px;
+    background-color: var(--grey-700);
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+.gameTitle {
+    font-size: 36px;
+    margin: 25px;
+}
+
+.bettingBar {
+    width: 200px;
+    height: 600px;
+    background-color: var(--grey-500);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px 0px 0px 25px;
+}
+
+.betButton {
+    width: 150px;
+    height: 50px;
+    background-color: var(--green-500);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--neutral-black);
+}
+
+.gameContainer {
+    border-radius: 0px 25px 25px 0px;
+}
+
+#diamondContainer {
+    width: 600px;
+    height: 125px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.diamond {
+    width: 100px;
+    height: 100px;
+    background-color: white;
 }
