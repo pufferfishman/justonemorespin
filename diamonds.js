@@ -47,5 +47,47 @@ function bet() {
         hand = "No Match";
     }
 
+    renderDiamonds(diamonds, hand);
+
     console.log(hand);
+}
+
+function renderDiamonds(diamonds, hand) {
+    let colour;
+
+    for (let i = 0; i < 5; i++) {
+        // decide colour
+
+        switch(diamonds[i]) {
+            case 1:
+                colour = red;
+                break;
+
+            case 2:
+                colour = yellow;
+                break;
+
+            case 3:
+                colour = green;
+                break
+
+            case 4:
+                colour = cyan;
+                break;
+
+            case 5:
+                colour = blue;
+                break;
+
+            case 6:
+                colour = pink;
+                break;
+
+            case 7:
+                colour = purple;
+                break;
+        }
+
+        
+    }
 }

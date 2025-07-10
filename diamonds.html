@@ -21,20 +21,98 @@
         </div>
         <div class="gameContainer shadow" id="diamondsGame">
             <div id="diamondsHands">
-                <div class="diamondsHand" id="fiveofakind"></div>
-                <div class="diamondsHand" id="fourofakind"></div>
-                <div class="diamondsHand" id="fullhouse"></div>
-                <div class="diamondsHand" id="threeofakind"></div>
-                <div class="diamondsHand" id="twopair"></div>
-                <div class="diamondsHand" id="onepair"></div>
-                <div class="diamondsHand" id="nomatch"></div>
+                <div class="diamondsHand" id="fiveofakind">
+                    <div class="diamondIndicatorContainer">
+                        <div class="diamondIndicator diamondIndicatorFilled"></div>
+                        <div class="diamondIndicator diamondIndicatorFilled"></div>
+                        <div class="diamondIndicator diamondIndicatorFilled"></div>
+                        <div class="diamondIndicator diamondIndicatorFilled"></div>
+                        <div class="diamondIndicator diamondIndicatorFilled"></div>
+                    </div>
+                    <span class="colorText diamondsHandAlign">Five of a Kind</span> <span class="colorText">0.04%</span> <span class="colorText">50.0×</span>
+                </div>
+                <div class="diamondsHand" id="fourofakind">
+                    <div class="diamondIndicatorContainer">
+                        <div class="diamondIndicator diamondIndicatorFilled"></div>
+                        <div class="diamondIndicator diamondIndicatorFilled"></div>
+                        <div class="diamondIndicator diamondIndicatorFilled"></div>
+                        <div class="diamondIndicator diamondIndicatorFilled"></div>
+                        <div class="diamondIndicator"></div>
+                    </div>
+                    <span class="colorText diamondsHandAlign">Four of a Kind</span> <span class="colorText">1.25%</span> <span class="colorText">5.00×</span>
+                </div>
+                <div class="diamondsHand" id="fullhouse">
+                    <div class="diamondIndicatorContainer">
+                        <div class="diamondIndicator diamondIndicatorFilled"></div>
+                        <div class="diamondIndicator diamondIndicatorFilled"></div>
+                        <div class="diamondIndicator diamondIndicatorFilled"></div>
+                        <div class="diamondIndicator diamondIndicatorBorder"></div>
+                        <div class="diamondIndicator diamondIndicatorBorder"></div>
+                    </div>
+                    <span class="colorText diamondsHandAlign">Full House</span> <span class="colorText">2.50%</span> <span class="colorText">4.00×</span>
+                </div>
+                <div class="diamondsHand" id="threeofakind">
+                    <div class="diamondIndicatorContainer">
+                        <div class="diamondIndicator diamondIndicatorFilled"></div>
+                        <div class="diamondIndicator diamondIndicatorFilled"></div>
+                        <div class="diamondIndicator diamondIndicatorFilled"></div>
+                        <div class="diamondIndicator"></div>
+                        <div class="diamondIndicator"></div>
+                    </div>
+                    <span class="colorText diamondsHandAlign">Three of a Kind</span> <span class="colorText">12.5%</span> <span class="colorText">3.00×</span>
+                </div>
+                <div class="diamondsHand" id="twopair">
+                    <div class="diamondIndicatorContainer">
+                        <div class="diamondIndicator diamondIndicatorFilled"></div>
+                        <div class="diamondIndicator diamondIndicatorFilled"></div>
+                        <div class="diamondIndicator diamondIndicatorBorder"></div>
+                        <div class="diamondIndicator diamondIndicatorBorder"></div>
+                        <div class="diamondIndicator"></div>
+                    </div>
+                    <span class="colorText diamondsHandAlign">Two Pair</span> <span class="colorText">18.8%</span> <span class="colorText">2.00×</span>
+                </div>
+                <div class="diamondsHand" id="onepair">
+                    <div class="diamondIndicatorContainer">
+                        <div class="diamondIndicator diamondIndicatorFilled"></div>
+                        <div class="diamondIndicator diamondIndicatorFilled"></div>
+                        <div class="diamondIndicator"></div>
+                        <div class="diamondIndicator"></div>
+                        <div class="diamondIndicator"></div>
+                    </div>
+                    <span class="colorText diamondsHandAlign">One Pair</span> <span class="colorText">50.0%</span> <span class="colorText">0.10×</span>
+                </div>
+                <div class="diamondsHand" id="nomatch">
+                    <div class="diamondIndicatorContainer">
+                        <div class="diamondIndicator"></div>
+                        <div class="diamondIndicator"></div>
+                        <div class="diamondIndicator"></div>
+                        <div class="diamondIndicator"></div>
+                        <div class="diamondIndicator"></div>
+                    </div>
+                    <span class="colorText diamondsHandAlign">No Match</span> <span class="colorText">15.0%</span> <span class="colorText">0.00×</span>
+                </div>
             </div>
             <div id="diamondContainer">
-                <div class="diamond" id="diamond1"></div>
-                <div class="diamond" id="diamond2"></div>
-                <div class="diamond" id="diamond3"></div>
-                <div class="diamond" id="diamond4"></div>
-                <div class="diamond" id="diamond5"></div>
+                <div class="diamondBaseContainer" id="diamondBaseContainer1">
+                    <div class="diamond" id="diamond1"></div>
+                    <div class="diamondBase"></div>
+                </div>
+                <div class="diamondBaseContainer" id="diamondBaseContainer1">
+                    <div class="diamond" id="diamond1"></div>
+                    <div class="diamondBase"></div>
+                </div>
+                <div class="diamondBaseContainer" id="diamondBaseContainer1">
+                    <div class="diamond" id="diamond1"></div>
+                    <div class="diamondBase"></div>
+                </div>
+                <div class="diamondBaseContainer" id="diamondBaseContainer1">
+                    <div class="diamond" id="diamond1"></div>
+                    <div class="diamondBase"></div>
+                </div>
+                <div class="diamondBaseContainer" id="diamondBaseContainer1">
+                    <div class="diamond" id="diamond1"></div>
+                    <div class="diamondBase"></div>
+                </div>
             </div>
         </div>
         <!--<div id="disclaimer"><span id="disclaimerTitle">Disclaimer:</span><br>This project is a simulator of a typical online casino, specifically Stake.com. This site does not promote or encourage gambling. It is a coding project for entertainment purposes, and to raise awareness about the dangers of gambling. This site does not use real money, only fake currency that can be replenished for free. <br><br>In every casino game, the house has at least a 1% edge over the player. In an online casino, this edge is usually 2-3% for all games. You may have temporary wins, but in the long run, probability states that the house will always win. <br><br>For example, in roulette, if you put it all in on red or black, it's not exactly a 50% chance to win. The 0 on the roulette wheel gives the house a 2.6% edge, which means the player will only win 47.4% of the time instead of 50%. <br><br>There is no strategy that can be used to gain an edge over the house, they will always win in every game more than 50% of the time. Don't gamble with real money, you will always lose.</div>-->

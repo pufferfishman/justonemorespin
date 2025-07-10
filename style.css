@@ -61,7 +61,7 @@
   --grey-200: rgb(177, 186, 211);
   --grey-300: rgb(85, 112, 134);
   --grey-350: rgb(61, 85, 100);
-  --grey-400: rgb(61, 69, 83);
+  --grey-400: rgb(47, 69, 83);
   --grey-500: rgb(33, 55, 67);
   --grey-600: rgb(26, 44, 56);
   --grey-700: rgb(15, 33, 46);
@@ -76,7 +76,6 @@
 	font-weight: 400;
 	font-style: normal;
 	color: white;
-    border: solid red;
 }
 
 html, body {
@@ -164,8 +163,9 @@ body {
     height: 600px;
     background-color: var(--grey-700);
     display: flex;
-    justify-content: center;
-    align-items: end;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .gameTitle {
@@ -196,7 +196,7 @@ body {
 }
 
 .gameContainer {
-    border-radius: 0px 25px 25px 0px;
+    border-radius: 0px 15px 15px 0px;
 }
 
 #diamondContainer {
@@ -206,10 +206,90 @@ body {
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
+    margin-bottom: 20px;
+}
+
+.diamondBaseContainer {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.diamondBase {
+    width: 100px;
+    height: 40px;
+    background-color: var(--grey-500);
+    transform: translate(0px, 30px);
+    position: absolute;
+    z-index: 0;
+    border-radius: 5px;
 }
 
 .diamond {
-    width: 100px;
-    height: 100px;
-    background-color: white;
+    width: 80px;
+    height: 80px;
+    background-color: var(--purple-600);
+    z-index: 10;
+    position: relative;
+    border-radius: 7.5px;
+    margin-top: -5px;
+}
+
+.diamondsHand {
+    width: 565px;
+    height: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: end;
+    background-color: var(--grey-600);
+    margin: 10px;
+    padding: 5px;
+    padding-right: 10px;
+    border-radius: 5px;
+}
+
+.colorText {
+    color: var(--grey-200);
+}
+
+.diamondIndicator {
+    width: 15px;
+    height: 15px;
+    border-radius: 2.5px;
+    background-color: var(--grey-700);
+    border: solid var(--grey-700);
+}
+
+.diamondIndicatorFilled {
+    background-color: var(--grey-400);
+    border: solid var(--grey-400);
+}
+
+.diamondIndicatorBorder {
+    background-color: var(--grey-700);
+    border: solid var(--grey-400);
+}
+
+.diamondIndicatorContainer {
+    width: 120px;
+    height: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.diamondsHandAlign {
+    width: 200px;
+    height: 25px;
+    margin-left: -50px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
