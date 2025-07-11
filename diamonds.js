@@ -54,40 +54,43 @@ function bet() {
 
 function renderDiamonds(diamonds, hand) {
     let colour;
+    let diamond;
 
     for (let i = 0; i < 5; i++) {
         // decide colour
 
         switch(diamonds[i]) {
             case 1:
-                colour = red;
+                colour = "red";
                 break;
 
             case 2:
-                colour = yellow;
+                colour = "yellow";
                 break;
 
             case 3:
-                colour = green;
+                colour = "green";
                 break
 
             case 4:
-                colour = cyan;
+                colour = "cyan";
                 break;
 
             case 5:
-                colour = blue;
+                colour = "blue";
                 break;
 
             case 6:
-                colour = pink;
+                colour = "pink";
                 break;
 
             case 7:
-                colour = purple;
+                colour = "purple";
                 break;
         }
 
-        
+        diamond = document.createElement("div");
+        diamond.classList = "diamond " + colour;
+        document.getElementById("diamondBaseContainer" + (i+1)).appendChild(diamond);
     }
 }
