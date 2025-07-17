@@ -193,6 +193,9 @@ body {
     justify-content: center;
     align-items: center;
     color: var(--neutral-black);
+    border: 0px;
+    font-size: 16px;
+    margin-top: 10px;
 }
 
 .gameContainer {
@@ -206,7 +209,7 @@ body {
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
 }
 
 .diamondBaseContainer {
@@ -240,7 +243,7 @@ body {
 }
 
 .diamondsHand {
-    width: 565px;
+    width: 560px;
     height: 25px;
     display: flex;
     flex-direction: row;
@@ -252,6 +255,7 @@ body {
     padding: 5px;
     padding-right: 10px;
     border-radius: 5px;
+    border: solid var(--grey-600) 2.5px;
 }
 
 .colorText {
@@ -327,4 +331,52 @@ body {
 .purple {
     background-color: var(--purple-500);
     border: solid var(--purple-600) 5px;
+}
+
+.betInput {
+    background-color: var(--grey-800);
+    border: solid var(--grey-600);
+    color: var(--grey-200);
+    width: 150px;
+    height: 35px;
+    font-size: 20px;
+    text-align: center;
+}
+
+
+/* diamond animation */
+@keyframes fadeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-40px) scale(0.75);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.diamond {
+  opacity: 0;
+  animation: fadeSlideIn 0.3s ease-in-out forwards;
+}
+
+.diamond {
+  transition: transform 0.2s ease;
+}
+.diamond:hover {
+  transform: scale(1.05);
+}
+
+.diamondsHand {
+  transition: border 0.2s ease-in-out;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
 }

@@ -16,8 +16,9 @@
     <div class="gameTitle">Diamonds</div>
     <div id="content">
         <div class="bettingBar shadow">
-            <div class="betInput">Input Bet</div>
-            <div class="betButton">Bet</div>
+            <input class="betInput" id="betInput" type="number" step="1" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+            <button class="betButton" id="bet" onclick="bet()">Bet</button>
+            <button class="betButton" id="autobet">Autobet</button>
         </div>
         <div class="gameContainer shadow" id="diamondsGame">
             <div id="diamondsHands">
