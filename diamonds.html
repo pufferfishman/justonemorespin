@@ -18,7 +18,8 @@
         <div class="bettingBar shadow">
             <input class="betInput" id="betInput" type="number" step="1" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
             <button class="betButton" id="bet" onclick="bet()">Bet</button>
-            <button class="betButton" id="autobet">Autobet</button>
+            <button class="betButton" id="autobet">Start Autobet</button>
+            <div class="betOutcome betOutcomeWin"><span class="bigFont betOutcomeText" id="betOutcomeMulti">3×</span><span class="betOutcomeText" id="betOutcomePayout">$1000<br>🡓<br>$3000</span></div>
         </div>
         <div class="gameContainer shadow" id="diamondsGame">
             <div id="diamondsHands">
@@ -114,6 +115,7 @@
         <!--<div id="disclaimer"><span id="disclaimerTitle">Disclaimer:</span><br>This project is a simulator of a typical online casino, specifically Stake.com. This site does not promote or encourage gambling. It is a coding project for entertainment purposes, and to raise awareness about the dangers of gambling. This site does not use real money, only fake currency that can be replenished for free. <br><br>In every casino game, the house has at least a 1% edge over the player. In an online casino, this edge is usually 2-3% for all games. You may have temporary wins, but in the long run, probability states that the house will always win. <br><br>For example, in roulette, if you put it all in on red or black, it's not exactly a 50% chance to win. The 0 on the roulette wheel gives the house a 2.6% edge, which means the player will only win 47.4% of the time instead of 50%. <br><br>There is no strategy that can be used to gain an edge over the house, they will always win in every game more than 50% of the time. Don't gamble with real money, you will always lose.</div>-->
     </div>
     
+    <script src="main.js"></script>
     <script src="diamonds.js"></script>
 </body>
 </html>

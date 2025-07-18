@@ -1,39 +1,39 @@
 // 7 diamond colours:
 // red yellow green cyan blue purple pink
-
 let diamonds = [];
 let currentIndex = 0;
 let betInterval;
 let diamondRenderDelay = 200;
 let autobetDelay = 2000;
 let autobetInterval = null;
+let betInput = document.getElementById("betInput");
 
-// start autobet
 document.getElementById("autobet").addEventListener("click", () => {
-    document.getElementById("autobet").innerHTML = "Stop Autobet";
-
-    // prevent multiple intervals
     if (autobetInterval !== null) {
-        clearInterval(autobetInterval); 
+        // Stop autobetting
+        clearInterval(autobetInterval);
         autobetInterval = null;
-        document.getElementById("autobet").innerHTML = "Autobet";
-        return;
+        document.getElementById("autobet").innerText = "Start Autobet";
+    } else {
+        // Start autobetting
+        bet(); // run first bet immediately
+        autobetInterval = setInterval(() => {
+            bet();
+        }, (diamondRenderDelay * 5) + 1000);
+        document.getElementById("autobet").innerText = "Stop Autobet";
     }
-
-    bet(); // run the first bet immediately
-
-    autobetInterval = setInterval(bet, ((diamondRenderDelay * 5) + 1000)); // bet when the current diamonds finish rendering + 1 second
 });
 
-// stop autobet
-document.getElementById("stopAutobet").addEventListener("click", () => {
-    clearInterval(autobetInterval);
-    autobetInterval = null;
-});
 
 function bet() {
     diamonds = [];
     currentIndex = 0;
+    currentBet = betInput.value;
+
+    if (!(parseFloat(currentBet) <= parseFloat(getCookie("balance")) && parseFloat(currentBet) > 0)) {
+        alert("error");
+        return;
+    }
 
     // clear all diamond element;
     document.querySelectorAll(".diamond").forEach(element => element.remove());
@@ -41,17 +41,21 @@ function bet() {
     // reset the highlighted hand
     renderDiamondHand("nomatch");
 
-    // generate the first diamond instantly
-
     // continued generating one diamond every half second
     betInterval = setInterval(() => {
         // stop generating diamonds after 5 iterations
         if (currentIndex >= 5) {
+            console.log("bet " + currentBet);
+            renderBetOutcome(currentBet, detectHand(diamonds))
             clearInterval(betInterval);
+            console.log("interval stopped");
             return;
         }
 
         addDiamond(currentIndex);
+     
+        // increment index
+        currentIndex++;
     }, diamondRenderDelay);
 }
 
@@ -68,86 +72,7 @@ function addDiamond(i) {
 
     // render hand
     renderDiamondHand(handID);
-
-    // increment index
-    currentIndex++;
 }
-
-/*function bet() {
-    // clear diamonds
-    diamonds = [];
-
-    
-    for (let i = 0; i < 5; i++) {
-        
-    }
-
-    console.log(diamonds);
-
-    
-    
-
-    for (let i of diamonds) {
-        counts[i] = (counts[i] || 0) + 1;
-    }
-
-    console.log(counts);
-
-    
-    
-    
-
-    console.log(frequency);
-
-    // detect which hand the diamonds make
-    let hand;
-    let handID;
-    let frequency;
-    let counts;
-
-    for (let i = 0; i < 5; i++) {
-        counts = {}
-
-        // generate 1 more diamond
-        diamonds.push(Math.floor(Math.random() * 7) + 1);
-        
-        // form diamond counts
-        for (let j of diamonds) {
-            counts[j] = (counts[j] || 0) + 1;
-        }
-        
-        // sort the counts by most to least
-        frequency = Object.values(counts).sort((a, b) => b - a);
-
-        // detect which hand the diamonds make
-        if (frequency[0] === 5) {
-            handID = "fiveofakind";
-            hand = "Five of a Kind";
-        } else if (frequency[0] === 4) {
-            handID = "fourofakind";
-            hand = "Four of a Kind";
-        } else if (frequency[0] === 3 && frequency[1] === 2) {
-            handID = "fullhouse";
-            hand = "Full House";
-        } else if (frequency[0] === 3) {
-            handID = "threeofakind";
-            hand = "Three of a Kind";
-        } else if (frequency[0] === 2 && frequency[1] === 2) {
-            handID = "twopair";
-            hand = "Two Pair";
-        } else if (frequency[0] === 2) {
-            handID = "onepair";
-            hand = "One Pair";
-        } else {
-            handID = "nomatch";
-            hand = "No Match";
-        }
-    }
-
-    renderDiamonds(diamonds);
-
-    console.log(hand);
-}*/
 
 function detectHand(diamonds) {
     let counts = {};
@@ -178,47 +103,47 @@ function renderDiamondHand(hand) {
     document.getElementById(hand).style.border = "solid var(--grey-200) 2.5px";
 }
 
-/*function renderDiamonds(diamonds) {
-    let colour;
-    let diamond;
+function renderBetOutcome(bet, hand) {
+    let multiplier;
+    let payout;
+    let display;
+    bet = parseFloat(bet);
 
-    document.querySelectorAll(".diamond").forEach(element => element.remove());
-
-    for (let i = 0; i < 5; i++) {
-        // decide colour
-
-        switch (diamonds[i]) {
-            case 1:
-                colour = "red";
-                break;
-
-            case 2:
-                colour = "yellow";
-                break;
-
-            case 3:
-                colour = "green";
-                break
-
-            case 4:
-                colour = "cyan";
-                break;
-
-            case 5:
-                colour = "blue";
-                break;
-
-            case 6:
-                colour = "pink";
-                break;
-
-            case 7:
-                colour = "purple";
-                break;
-        }
-
-        diamond = document.createElement("div");
-        diamond.classList = "diamond " + colour;
-        document.getElementById("diamondBaseContainer" + (i + 1)).appendChild(diamond);
+    switch (hand) {
+        case ("fiveofakind"):
+            multiplier = 50;
+            break;
+        case ("fourofakind"):
+            multiplier = 5;
+            break;
+        case ("fullhouse"):
+            multiplier = 4;
+            break;
+        case ("threeofakind"):
+            multiplier = 3;
+            break;
+        case ("twopair"):
+            multiplier = 2;
+            break;
+        case ("onepair"):
+            multiplier = 0.1;
+            break;
+        case ("nomatch"):
+            multiplier = 0;
+            break;
     }
-}*/
+
+    // calculate payout and round to .00
+    payout = (Math.round((bet * multiplier) * 100) / 100);
+    console.log("bet, multi, payout are ", bet, multiplier, payout);
+    // calculate whether or not the bet was won or lost
+    let outcome = (multiplier >= 1);
+
+    display = parseFloat(payout).toFixed(2);
+
+    // change the balance to the appropriate value
+    balance(bet, display);
+
+    let multiText = document.getElementById("betOutcomeMulti");
+    let payoutText = document.getElementById("betOutcomePayout");
+}
