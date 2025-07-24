@@ -179,7 +179,7 @@ body {
     background-color: var(--grey-500);
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     border-radius: 25px 0px 0px 25px;
 }
@@ -335,14 +335,19 @@ body {
 
 .betInput {
     background-color: var(--grey-800);
-    border: solid var(--grey-600);
+    border: solid var(--grey-600) 5px;
+    border-radius: 5px;
     color: var(--grey-200);
-    width: 150px;
+    width: 137.5px;
     height: 35px;
     font-size: 20px;
     text-align: center;
+    margin-top: 20px;
 }
 
+.betInput:focus {
+    outline: none;
+}
 
 /* diamond animation */
 @keyframes fadeSlideIn {
@@ -393,17 +398,17 @@ input[type="number"]::-webkit-inner-spin-button {
     text-align: center;
 }
 
-.betOutcomeLoss {
-    border: solid var(--red-600) 5px;
-    color: var(--red-600);
+.betOutcomeWin {
+    border-color: var(--green-500); /* or #00ff00 */
 }
 
-.betOutcomeWin {
-    border: solid var(--green-500) 5px;
+.betOutcomeLoss {
+    border-color: var(--red-500); /* or #ff0000 */
 }
+
 
 .redText {
-    color: var(--red-600);
+    color: var(--red-500);
 }
 
 .greenText {
@@ -413,4 +418,48 @@ input[type="number"]::-webkit-inner-spin-button {
 .bigFont {
     font-size: 32px;
     margin-bottom: 10px;
+}
+
+.betOutcomeLoss,
+.betOutcomeWin {
+    transition: border-color 0.3s ease;
+}
+
+.redText,
+.greenText {
+    transition: color 0.3s ease;
+}
+
+.changeBetButton {
+    height: 35px;
+    background-color: var(--grey-600);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--grey-200);
+    border: 0px;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+#halfBet, #doubleBet {
+    flex-grow: 1;
+    margin-right: 7.5px;
+}
+
+#allIn {
+    flex-grow: 2;
+}
+
+#changeBetContainer {
+    width: 150px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.betButton:disabled {
+    background-color: var(--green-700);
 }

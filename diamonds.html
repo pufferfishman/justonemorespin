@@ -16,10 +16,15 @@
     <div class="gameTitle">Diamonds</div>
     <div id="content">
         <div class="bettingBar shadow">
-            <input class="betInput" id="betInput" type="number" step="1" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+            <input class="betInput" id="betInput" type="number" step="1" min="0" oninput="formatBet()" onfocusout="betInputUnfocus()">
+            <div id="changeBetContainer">
+                <button class="changeBetButton" id="halfBet" onclick="changeBet('half')">½</button>
+                <button class="changeBetButton" id="doubleBet" onclick="changeBet('double')">2×</button>
+                <button class="changeBetButton" id="allIn" onclick="changeBet('allin')">All in</button>
+            </div>
             <button class="betButton" id="bet" onclick="bet()">Bet</button>
             <button class="betButton" id="autobet">Start Autobet</button>
-            <div class="betOutcome betOutcomeWin"><span class="bigFont betOutcomeText" id="betOutcomeMulti">3×</span><span class="betOutcomeText" id="betOutcomePayout">$1000<br>🡓<br>$3000</span></div>
+            <div class="betOutcome" id="betOutcome"><span class="bigFont betOutcomeText" id="betOutcomeMulti"></span><span class="betOutcomeText" id="betOutcomePayout"></span></div>
         </div>
         <div class="gameContainer shadow" id="diamondsGame">
             <div id="diamondsHands">

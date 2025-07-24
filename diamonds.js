@@ -7,33 +7,39 @@ let diamondRenderDelay = 200;
 let autobetDelay = 2000;
 let autobetInterval = null;
 let betInput = document.getElementById("betInput");
+let betButton = document.getElementById("bet");
+let autoBet = document.getElementById("autobet");
+let isAutobetting = false;
 
-document.getElementById("autobet").addEventListener("click", () => {
+autoBet.addEventListener("click", () => {
     if (autobetInterval !== null) {
         // Stop autobetting
         clearInterval(autobetInterval);
+        isAutobetting = true;
         autobetInterval = null;
-        document.getElementById("autobet").innerText = "Start Autobet";
+        autoBet.innerText = "Start Autobet";
     } else {
         // Start autobetting
-        bet(); // run first bet immediately
+        bet(true); // run first bet immediately
         autobetInterval = setInterval(() => {
-            bet();
+            bet(true);
         }, (diamondRenderDelay * 5) + 1000);
-        document.getElementById("autobet").innerText = "Stop Autobet";
+        autoBet.innerText = "Stop Autobet";
     }
 });
 
 
-function bet() {
+function bet(autobet) {
     diamonds = [];
     currentIndex = 0;
     currentBet = betInput.value;
 
     if (!(parseFloat(currentBet) <= parseFloat(getCookie("balance")) && parseFloat(currentBet) > 0)) {
-        alert("error");
+        alert("Enter a valid bet. Your bet must be within your balance. Your bet must be a number between $1 and $1,000,000 and can only have up to 2 decimal digits.");
         return;
     }
+
+    betButton.disabled = true;
 
     // clear all diamond element;
     document.querySelectorAll(".diamond").forEach(element => element.remove());
@@ -46,7 +52,7 @@ function bet() {
         // stop generating diamonds after 5 iterations
         if (currentIndex >= 5) {
             console.log("bet " + currentBet);
-            renderBetOutcome(currentBet, detectHand(diamonds))
+            renderBetOutcome(currentBet, detectHand(diamonds), autobet)
             clearInterval(betInterval);
             console.log("interval stopped");
             return;
@@ -103,12 +109,14 @@ function renderDiamondHand(hand) {
     document.getElementById(hand).style.border = "solid var(--grey-200) 2.5px";
 }
 
-function renderBetOutcome(bet, hand) {
+function renderBetOutcome(bet, hand, autobet) {
     let multiplier;
     let payout;
     let display;
-    bet = parseFloat(bet);
+    bet = parseFloat(bet).toFixed(2);
 
+    if (!autobet && !isAutobetting) {betButton.disabled = false;}
+    
     switch (hand) {
         case ("fiveofakind"):
             multiplier = 50;
@@ -141,9 +149,70 @@ function renderBetOutcome(bet, hand) {
 
     display = parseFloat(payout).toFixed(2);
 
-    // change the balance to the appropriate value
-    balance(bet, display);
-
+    // change the bet outcome box to the right values and color
+    let betOutcomeBorder = document.getElementById("betOutcome");
     let multiText = document.getElementById("betOutcomeMulti");
     let payoutText = document.getElementById("betOutcomePayout");
+    multiText.innerHTML = multiplier + "×";
+    payoutText.innerHTML = "$" + bet + "<br>🡓<br>$" + display;
+    
+    if (outcome) {
+        betOutcomeBorder.classList = "betOutcome betOutcomeWin";
+        multiText.classList = "bigFont betOutcomeText greenText";
+        payoutText.classList = "betOutcomeText greenText";
+    } else {
+        betOutcomeBorder.classList = "betOutcome betOutcomeLoss";
+        multiText.classList = "bigFont betOutcomeText redText";
+        payoutText.classList = "betOutcomeText redText";
+    }
+
+    // change the balance to the appropriate value
+    balance(bet, display);
+}
+
+function changeBet(change) {
+    if (change == "allin") {
+        betInput.value = parseFloat(getCookie("balance")).toFixed(2);
+        return;
+    }
+
+    if (!(parseFloat(betInput.value) > 1 && parseFloat(betInput.value) > 1)) {
+        alert("Enter a valid bet amount. Your bet has to be a positive number with no more than 2 decimal digits.")
+        return;
+    }
+
+    if (change == "half") {
+        if (parseFloat(betInput.value) < 1) {
+            alert("Enter a valid bet amount. Bets under $1 can't be halved.")
+            return;
+        }
+
+        betInput.value = (betInput.value / 2).toFixed(2);
+
+    } else if (change == "double") {
+        if (parseFloat(betInput.value) > 1000000) {
+            alert("Enter a valid bet amount. Bets over $1,000,000 can't be doubled.")
+            return;
+        }
+
+        betInput.value = (betInput.value * 2).toFixed(2);
+    }
+}
+
+function betInputUnfocus() {
+    betInput.value = (parseFloat(betInput.value).toFixed(2)).toString();
+}
+
+function formatBet() {
+    this.value = this.value.replace(/[^0-9.]/g, '');
+
+    const parts = this.value.split('.');
+    if (parts.length > 2) {
+        this.value = parts[0] + '.' + parts.slice(1).join('');
+    }
+    if (parts[1]) {
+        parts[1] = parts[1].slice(0, 2); // keep only two digits after dot
+        this.value = parts[0] + '.' + parts[1];
+    }
+
 }
