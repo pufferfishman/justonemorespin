@@ -23,7 +23,7 @@ This game is fully playable on its own, but when I add new games I will also add
 
 [Link to project](https://pufferfishman.github.io/justonemorespin/)
 
-<img width="1000" height="800" alt="Screenshot 2025-07-24 192522" src="https://github.com/user-attachments/assets/1e05d971-6bf5-453e-a06d-b1a94c0efd2f" />
+<img width="1000" height="800" alt="Screenshot 2025-07-25 133052" src="https://github.com/user-attachments/assets/2149eef5-82bd-4a7e-aba5-091d672c6dbe" />
 
 ## Diamonds
 This game is very simple, you just put in a bet, and press the button.
