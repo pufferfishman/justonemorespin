@@ -108,10 +108,10 @@ body {
     width: 100vw;
     height: 50px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 #content {
@@ -133,6 +133,9 @@ body {
 }
 
 #balance {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: var(--grey-700);
     border-radius: 5px;
     height: 40px;
@@ -140,6 +143,19 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#resetBalance {
+    outline: none;
+    border: none;
+    background-color: var(--red-500);
+    border-radius: 5px;
+    height: 40px;
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
 }
 
 #gamesGrid {

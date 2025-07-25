@@ -13,6 +13,8 @@ let isAutobetting = false;
 let currentBet = null;
 let autobetStopping = false;
 
+document.getElementById("balance").innerHTML = "$" + getCookie("balance");
+
 autoBet.addEventListener("click", () => {
     currentBet = betInput.value;
     if (autobetInterval !== null) {

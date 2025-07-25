@@ -1,4 +1,6 @@
-resetBalance(1000);
+if (getCookie("balance") == null) {
+  setCookie("balance", 1000);
+}
 
 // COOKIE SETTER AND GETTER
 function setCookie(name, value) {
