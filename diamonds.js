@@ -10,16 +10,26 @@ let betInput = document.getElementById("betInput");
 let betButton = document.getElementById("bet");
 let autoBet = document.getElementById("autobet");
 let isAutobetting = false;
+let currentBet = null;
+let autobetStopping = false;
 
 autoBet.addEventListener("click", () => {
+    currentBet = betInput.value;
     if (autobetInterval !== null) {
         // Stop autobetting
         clearInterval(autobetInterval);
-        isAutobetting = true;
+        isAutobetting = false;
         autobetInterval = null;
         autoBet.innerText = "Start Autobet";
+        autobetStopping = true;
     } else {
         // Start autobetting
+        if (!(parseFloat(currentBet) <= parseFloat(getCookie("balance")) && parseFloat(currentBet) > 0)) {
+            alert("Enter a valid bet. Your bet must be within your balance. Your bet must be a number between $1 and $1,000,000 and can only have up to 2 decimal digits.");
+            return;
+        }
+        isAutobetting = true;
+        betButton.disabled = true;
         bet(true); // run first bet immediately
         autobetInterval = setInterval(() => {
             bet(true);
@@ -35,11 +45,22 @@ function bet(autobet) {
     currentBet = betInput.value;
 
     if (!(parseFloat(currentBet) <= parseFloat(getCookie("balance")) && parseFloat(currentBet) > 0)) {
+        /*if (autobet) {
+            clearInterval(autobetInterval);
+            isAutobetting = false;
+            autobetInterval = null;
+            autoBet.innerText = "Start Autobet";
+            betButton.disabled = false;
+            return;
+        }*/
         alert("Enter a valid bet. Your bet must be within your balance. Your bet must be a number between $1 and $1,000,000 and can only have up to 2 decimal digits.");
         return;
     }
 
     betButton.disabled = true;
+    if (!autobet) {
+        autoBet.disabled = true;
+    }
 
     // clear all diamond element;
     document.querySelectorAll(".diamond").forEach(element => element.remove());
@@ -115,7 +136,10 @@ function renderBetOutcome(bet, hand, autobet) {
     let display;
     bet = parseFloat(bet).toFixed(2);
 
-    if (!autobet && !isAutobetting) {betButton.disabled = false;}
+    if (!autobet || !isAutobetting) {
+        betButton.disabled = false;
+        autoBet.disabled = false;
+    }
     
     switch (hand) {
         case ("fiveofakind"):
@@ -168,6 +192,30 @@ function renderBetOutcome(bet, hand, autobet) {
 
     // change the balance to the appropriate value
     balance(bet, display);
+
+    if (autobet) {
+    const newBalance = parseFloat(getCookie("balance"));
+    const betAmount = parseFloat(betInput.value);
+
+    if (betAmount > newBalance || betAmount <= 0) {
+        clearInterval(autobetInterval);
+        autobetInterval = null;
+        autoBet.innerText = "Start Autobet";
+        isAutobetting = false;
+        autobetStopping = true;
+
+        alert("Autobet stopped: balance too low for next bet.");
+    }
+
+    if (autobetStopping) {
+        isAutobetting = false;
+        autobetStopping = false;
+        betButton.disabled = false;
+        autoBet.disabled = false;
+        return;
+    }
+}
+
 }
 
 function changeBet(change) {
