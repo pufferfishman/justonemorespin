@@ -13,7 +13,7 @@ The 0 on the roulette wheel gives the house a 2.6% edge, which means the player 
 
 There is no strategy that can be used to gain an edge over the house, they will always win in every game more than 50% of the time. Please don't gamble with real money, you will always lose.
 
-# Plans for this Site
+## Plans for this Site
 
 My plan is for Just One More Spin to be a full clone of the Stake.com online casino.
 I'm programming all the games one by one, and I will update this README whenever I finish a new game.
