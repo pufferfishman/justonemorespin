@@ -10,29 +10,25 @@ let betInput = document.getElementById("betInput");
 let betButton = document.getElementById("bet");
 let autoBet = document.getElementById("autobet");
 let isAutobetting = false;
-let currentBet = null;
-let autobetStopping = false;
-
-document.getElementById("balance").innerHTML = "$" + getCookie("balance");
 
 autoBet.addEventListener("click", () => {
-    currentBet = betInput.value;
     if (autobetInterval !== null) {
         // Stop autobetting
         clearInterval(autobetInterval);
         isAutobetting = false;
         autobetInterval = null;
         autoBet.innerText = "Start Autobet";
-        autobetStopping = true;
+
+        betButton.disabled = false;
+        autoBet.disabled = false;
     } else {
         // Start autobetting
         if (!(parseFloat(currentBet) <= parseFloat(getCookie("balance")) && parseFloat(currentBet) > 0)) {
             alert("Enter a valid bet. Your bet must be within your balance. Your bet must be a number between $1 and $1,000,000 and can only have up to 2 decimal digits.");
             return;
         }
-        isAutobetting = true;
-        betButton.disabled = true;
         bet(true); // run first bet immediately
+        betButton.disabled = true;
         autobetInterval = setInterval(() => {
             bet(true);
         }, (diamondRenderDelay * 5) + 1000);
@@ -138,7 +134,7 @@ function renderBetOutcome(bet, hand, autobet) {
     let display;
     bet = parseFloat(bet).toFixed(2);
 
-    if (!autobet || !isAutobetting) {
+    if (!autobet && !isAutobetting) {
         betButton.disabled = false;
         autoBet.disabled = false;
     }
@@ -204,17 +200,11 @@ function renderBetOutcome(bet, hand, autobet) {
         autobetInterval = null;
         autoBet.innerText = "Start Autobet";
         isAutobetting = false;
-        autobetStopping = true;
 
-        alert("Autobet stopped: balance too low for next bet.");
-    }
-
-    if (autobetStopping) {
-        isAutobetting = false;
-        autobetStopping = false;
         betButton.disabled = false;
         autoBet.disabled = false;
-        return;
+
+        alert("Autobet stopped: balance too low for next bet.");
     }
 }
 

@@ -172,6 +172,9 @@ body {
     width: 120px;
     height: 180px;
     margin: 15px 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #diamondsGame {
@@ -478,4 +481,24 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .betButton:disabled {
     background-color: var(--green-700);
+}
+
+.square {
+    background-color: var(--grey-500);
+    width: 90px;
+    height: 90px;
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+}
+
+#kenoGrid {
+    display: grid;
+    grid-template-columns: repeat(8, 100px);
+    grid-template-rows: repeat(5, 100px);
+    width: 800px;
+    height: 600px;
+    border: solid red;
 }

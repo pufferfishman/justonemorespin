@@ -1,6 +1,12 @@
-if (getCookie("balance") == null) {
-  setCookie("balance", 1000);
-}
+window.onload = function () {
+  if (getCookie("balance") == null) {
+    resetBalance(1000);
+  } else {
+    document.getElementById("balance").innerHTML = "$" + getCookie("balance");
+  }
+};
+
+
 
 // COOKIE SETTER AND GETTER
 function setCookie(name, value) {
